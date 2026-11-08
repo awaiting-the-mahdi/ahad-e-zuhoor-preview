@@ -859,15 +859,26 @@ document.addEventListener("click", function (event) {
 const mikyalChecks = document.querySelectorAll(".mikyal-check");
 const mikyalProgressText = document.getElementById("mikyal-progress-text");
 const mikyalProgressBar = document.getElementById("mikyal-progress-bar");
-const mikyalProgressKey = "awaitingMahdi-readingProgress-mikyal";
+const mikyalProgressKey = "awaitingMahdi-readingProgress-mikyal-vol-1";
+const legacyMikyalProgressKey = "awaitingMahdi-readingProgress-mikyal";
 
 if (mikyalChecks.length && mikyalProgressText && mikyalProgressBar) {
   let mikyalSaved = [];
 
   try {
-    mikyalSaved = JSON.parse(
-      localStorage.getItem(mikyalProgressKey) || "[]"
-    );
+    const currentSaved = localStorage.getItem(mikyalProgressKey);
+const legacySaved = localStorage.getItem(legacyMikyalProgressKey);
+
+mikyalSaved = JSON.parse(
+  currentSaved || legacySaved || "[]"
+);
+
+if (!currentSaved && legacySaved) {
+  localStorage.setItem(
+    mikyalProgressKey,
+    JSON.stringify(mikyalSaved)
+  );
+}
     if (!Array.isArray(mikyalSaved)) mikyalSaved = [];
   } catch (error) {
     mikyalSaved = [];
