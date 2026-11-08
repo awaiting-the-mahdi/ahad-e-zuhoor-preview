@@ -155,7 +155,15 @@ function showModal(title,kicker,body){document.getElementById('modalTitle').text
 document.querySelectorAll('.book-more').forEach(a=>{a.href='book.html?id='+a.dataset.book;});document.getElementById('sourceInfo').addEventListener('click',()=>showModal('How to cite a narration','Reference guidance','<p>For each narration, include as much of the following as your source provides:</p><ul><li>Original Arabic text</li><li>Collection and author</li><li>Book/chapter and report number</li><li>Volume and page for the exact edition</li><li>Translator and publisher for translations</li><li>A separate scholarly grading, if one is available and relevant</li></ul><p>A narration appearing in a collection does not automatically mean every scholar grades it authentic.</p>'));
 document.getElementById('modalClose').addEventListener('click',()=>modal.classList.remove('open'));
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){modal.classList.remove('open');document.getElementById('searchPanel').classList.remove('open')}});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    modal.classList.remove('open');
+    document.getElementById('searchPanel').classList.remove('open');
+    navlinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open menu');
+  }
+});
 const searchPanel=document.getElementById('searchPanel'),searchInput=document.getElementById('searchInput');
 const searchable=[...Object.entries(bookData).map(([id,b])=>({title:b.title,desc:b.kicker+' · book notes',href:'#books',id})),{title:'Hadiths and source verification',desc:'How to cite narrations carefully',href:'#hadiths'},{title:'Preparation during the occultation',desc:'Reflection and learning themes',href:'#about'},{title:'Dua al-Ghaybah',desc:'Supplication for recognition',href:'#hadiths'}];
 function renderSearch(q=''){let matches=searchable.filter(x=>(x.title+' '+x.desc).toLowerCase().includes(q.toLowerCase()));document.getElementById('searchResults').innerHTML=matches.length?matches.map(x=>`<div class="search-result" tabindex="0" data-href="${x.href}" data-id="${x.id||''}"><strong>${x.title}</strong><br><small>${x.desc}</small></div>`).join(''):'<div class="search-result">No results. Try another keyword.</div>';document.querySelectorAll('.search-result[data-href]').forEach(el=>{const go=()=>{searchPanel.classList.remove('open');if(el.dataset.id){const b=bookData[el.dataset.id];showModal(b.title,b.kicker,b.body)}else document.querySelector(el.dataset.href).scrollIntoView({behavior:'smooth'})};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter')go()})})}
