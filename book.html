@@ -175,6 +175,38 @@ body[data-reading-language="urdu"] .english-copy {
 body[data-reading-language="english"] .roman-urdu {
   display: none;
 }
+article .language-switch {
+  background:#EAE6DC;
+  border:1px solid rgba(8,20,38,.14);
+  border-radius:10px;
+  padding:18px;
+}
+
+article .language-heading {
+  color:var(--navy);
+  font-weight:600;
+}
+
+article .language-button {
+  background:transparent;
+  color:var(--navy);
+  border:1px solid rgba(8,20,38,.28);
+  padding:9px 16px;
+  border-radius:24px;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease;
+}
+
+article .language-button.active {
+  background:var(--navy);
+  color:var(--cream);
+  border-color:var(--navy);
+}
+
+article .language-button:focus-visible {
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+}
 </style>
 </head>
 <body>
