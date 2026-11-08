@@ -25,7 +25,7 @@
     <nav class="navlinks" id="navlinks" aria-label="Main navigation">
       <a class="active" href="#home">Home</a><a href="#books">Books</a><a href="#hadiths">Hadiths</a><a href="#about">About</a><a href="#learn">Learn</a>
     </nav>
-    <div class="navactions"><button class="iconbtn" id="searchOpen" aria-label="Search">⌕</button><button class="iconbtn" id="themeToggle" aria-label="Toggle light and dark theme">☾</button><button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button></div>
+    <div class="navactions"><button class="iconbtn" id="searchOpen" aria-label="Search">⌕</button><button class="iconbtn" id="themeToggle" aria-label="Toggle light and dark theme">☾</button><button class="menu-btn" id="menuToggle" aria-label="Open menu" aria-controls="navlinks" aria-expanded="false">☰</button></div>
   </div>
 </header>
 <main class="home-page home-main">
@@ -161,7 +161,22 @@ const searchable=[...Object.entries(bookData).map(([id,b])=>({title:b.title,desc
 function renderSearch(q=''){let matches=searchable.filter(x=>(x.title+' '+x.desc).toLowerCase().includes(q.toLowerCase()));document.getElementById('searchResults').innerHTML=matches.length?matches.map(x=>`<div class="search-result" tabindex="0" data-href="${x.href}" data-id="${x.id||''}"><strong>${x.title}</strong><br><small>${x.desc}</small></div>`).join(''):'<div class="search-result">No results. Try another keyword.</div>';document.querySelectorAll('.search-result[data-href]').forEach(el=>{const go=()=>{searchPanel.classList.remove('open');if(el.dataset.id){const b=bookData[el.dataset.id];showModal(b.title,b.kicker,b.body)}else document.querySelector(el.dataset.href).scrollIntoView({behavior:'smooth'})};el.addEventListener('click',go);el.addEventListener('keydown',e=>{if(e.key==='Enter')go()})})}
 document.getElementById('searchOpen').addEventListener('click',()=>{searchPanel.classList.add('open');renderSearch('');searchInput.focus()});document.getElementById('searchClose').addEventListener('click',()=>searchPanel.classList.remove('open'));searchPanel.addEventListener('click',e=>{if(e.target===searchPanel)searchPanel.classList.remove('open')});searchInput.addEventListener('input',()=>renderSearch(searchInput.value));
 document.getElementById('themeToggle').addEventListener('click',()=>{document.documentElement.classList.toggle('dark-mode');document.getElementById('themeToggle').textContent=document.documentElement.classList.contains('dark-mode')?'☀':'☾'});
-document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('navlinks').classList.toggle('open'));document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
+const menuToggle = document.getElementById('menuToggle');
+const navlinks = document.getElementById('navlinks');
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = navlinks.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+});
+
+document.querySelectorAll('.navlinks a').forEach(a => {
+  a.addEventListener('click', () => {
+    navlinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open menu');
+  });
+});
 document.getElementById('allBooks').addEventListener('click',e=>{
   e.preventDefault(); window.location.href='book.html'; return;
  showModal('Books and reading notes','Library',
