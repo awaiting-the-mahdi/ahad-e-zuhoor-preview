@@ -82,10 +82,10 @@
 }
 
 .home-hero-title {
-  max-width: 12ch;
+  max-width: none;
   margin-bottom: var(--space-4);
   font-family: var(--font-editorial);
-  font-size: clamp(3.1rem, 7.2vw, 6.4rem);
+  font-size: clamp(2.25rem, 10vw, 4rem);
   font-weight: 400;
   letter-spacing: -0.045em;
   line-height: 1.02;
