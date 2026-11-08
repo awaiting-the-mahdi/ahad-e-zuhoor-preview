@@ -272,13 +272,15 @@ const books = {
 
 <div class="language-switch">
   <p class="language-heading">Choose your reading language</p>
-  <button type="button" class="language-button active"
-    data-language="both">Both</button>
-  <button type="button" class="language-button"
-    data-language="urdu">Roman Urdu</button>
-  <button type="button" class="language-button"
-    data-language="english">Simple English</button>
-</div>
+<button type="button" class="language-button active"
+  data-language="both" aria-pressed="true">Both</button>
+
+<button type="button" class="language-button"
+  data-language="urdu" aria-pressed="false">Roman Urdu</button>
+
+<button type="button" class="language-button"
+  data-language="english" aria-pressed="false">Simple English</button>
+  </div>
 
 <style>
 .language-switch {
@@ -506,10 +508,14 @@ body[data-reading-language="english"] .roman-urdu {
 
       <div class="language-switch">
         <p class="language-heading">Choose your reading language</p>
-        <button type="button" class="language-button active" data-language="both">Both</button>
-        <button type="button" class="language-button" data-language="urdu">Roman Urdu</button>
-        <button type="button" class="language-button" data-language="english">Simple English</button>
-      </div>
+      <button type="button" class="language-button active"
+  data-language="both" aria-pressed="true">Both</button>
+
+<button type="button" class="language-button"
+  data-language="urdu" aria-pressed="false">Roman Urdu</button>
+
+<button type="button" class="language-button"
+  data-language="english" aria-pressed="false">Simple English</button>    </div>
 
       <style>
         .mikyal-progress-track {
@@ -928,8 +934,10 @@ document.addEventListener("click", function (event) {
     button.dataset.language;
 
   document.querySelectorAll(".language-button").forEach(item => {
-    item.classList.toggle("active", item === button);
-  });
+  const selected = item === button;
+
+  item.classList.toggle("active", selected);
+  item.setAttribute("aria-pressed", String(selected));
 });
 
 
