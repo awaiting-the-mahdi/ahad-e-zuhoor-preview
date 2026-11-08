@@ -488,9 +488,9 @@
     flex-direction: column;
   }
 
-  .home-hero-actions .button {
-    width: 100%;
-  }
+.home-hero-actions .btn {
+  width: 100%;
+}
 
   .book-grid {
     gap: var(--space-3);
