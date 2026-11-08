@@ -1,0 +1,21 @@
+/*
+ * AHD-E-ZUHOOR
+ * Legacy Homepage Compatibility Layer
+ *
+ * Purpose:
+ * Connect the existing homepage palette to the
+ * approved design tokens without changing its
+ * structure, components or JavaScript.
+ */
+
+body {
+  --navy: var(--palette-midnight);
+  --navy2: var(--palette-deep-blue);
+  --teal: var(--app-surface-raised);
+  --gold: var(--palette-gold);
+  --cream: var(--palette-ivory);
+  --ink: var(--palette-ink);
+  --muted: var(--palette-muted);
+  --line: rgba(215, 188, 128, 0.25);
+  --card: var(--app-surface);
+}
