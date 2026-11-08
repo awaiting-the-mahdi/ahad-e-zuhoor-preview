@@ -65,10 +65,43 @@ h3 { font-size:21px; margin-top:26px; }
 .book small { color:var(--gold); letter-spacing:.12em; text-transform:uppercase; }
 .book h2 { color:#f6f2e8; font-size:24px; margin:5px 0; }
 .book p { color:#b9c8ca; font-size:14px; margin:0; }
-article { color:#dce5e5; }
-article p, article li { font-size:16px; }
-article strong { color:#f4e2bd; }
-article ul, article ol { padding-left:24px; }
+article {
+  color:var(--ink);
+  background:var(--cream);
+  padding:clamp(22px, 5vw, 42px);
+  border-radius:12px;
+  line-height:1.85;
+}
+
+article p,
+article li {
+  font-size:16px;
+  line-height:1.85;
+}
+
+article strong {
+  color:var(--navy);
+}
+
+article h2,
+article h3 {
+  color:var(--navy);
+}
+
+article a {
+  color:#344F70;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+article ul,
+article ol {
+  padding-left:24px;
+}
+
+article .roman-urdu {
+  color:#46566A;
+}
 .notice {
   border-left:2px solid var(--gold);
   background:#0a2934; padding:16px 20px;
