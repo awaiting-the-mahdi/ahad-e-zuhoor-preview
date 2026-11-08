@@ -782,6 +782,42 @@ body[data-reading-language="english"] .roman-urdu {
       </ul>`
   }
 };
+// Separate reading destinations for each Mikyal volume.
+// Keep the old "mikyal" route working for existing links.
+books["mikyal-vol-1"] = Object.assign({}, books.mikyal, {
+  title: "Mikyal ul Makarim — Volume 1",
+  kicker: "Volume 1 · Bilingual reading guide"
+});
+
+books["mikyal-vol-2"] = {
+  title: "Mikyal ul Makarim — Volume 2",
+  kicker: "Dedicated study space",
+  body: `
+    <p><strong>Welcome to the Volume 2 study space.</strong></p>
+
+    <p>This is a separate reading destination for the second volume of
+    <em>Mikyal ul Makarim</em>.</p>
+
+    <h2>Preparing the study guide</h2>
+    <p>Volume-specific chapter notes will be added after checking the
+    original volume and its table of contents. We will not assume that
+    Volume 1's chapter summaries apply to Volume 2.</p>
+
+    <h2>Our study method</h2>
+    <ul>
+      <li>Record the edition and translator being studied.</li>
+      <li>Follow the actual headings and chapter order.</li>
+      <li>Distinguish the author's explanations from quoted narrations.</li>
+      <li>Record references carefully and verify them against the edition.</li>
+    </ul>
+
+    <div class="notice">
+      <strong>Research note:</strong>
+      Volume 2's detailed bilingual study notes are being prepared.
+      No chapter summaries or page references are being assumed.
+    </div>
+  `
+};
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const book = books[id];
